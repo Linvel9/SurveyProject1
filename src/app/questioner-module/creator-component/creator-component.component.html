@@ -1,0 +1,9 @@
+<input type="text" (input)="inputHandler($event)">
+
+<button (click)="OpenQ()"></button>
+
+<div *ngFor="let item of formArray; index as i">
+    <span>{{item.title}}</span>
+    <span>{{item}}</span>
+    <input>
+</div>
