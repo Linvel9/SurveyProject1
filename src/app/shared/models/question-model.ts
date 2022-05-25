@@ -2,8 +2,9 @@ import { FormGroup } from "@angular/forms";
 
 export class Question {
     constructor(
+        public form: FormGroup,
+        public type: string,
         public title?: string,
-        public form?: FormGroup,
         public id?: number
     ) { }
 
