@@ -1,0 +1,65 @@
+.div {
+    background: rgb(244, 244, 244);
+    width: 100%;
+    height: 100%;
+}
+button {
+    color: black;
+    background: #fff;
+    padding: .2em 1em;
+    margin: 10px;
+    box-shadow: 0px 1px 2px rgb(216, 216, 216);
+    font-family: Arial;
+    font-size: calc(2 * var(--base-unit, 8px));
+    line-height: calc(3 * var(--base-unit, 8px));
+    text-align: center;
+    border: 2px solid rgba(0,0,0,0);
+}
+button:hover {border: 2px solid #02906f;}
+button:active { background: #02906f; color:white;}
+
+.btn-success {
+    font-weight: bold;
+    color:  #059c7e;
+    border-radius: 10px;
+    padding: .6em 2em;
+    background: #d0e3df;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 54%;
+    height: 100%;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 8px 8px 8px;
+    background: #fff;
+    box-shadow: 2px 1px 1px 2px rgb(235, 235, 235);
+    border: 2px;
+    outline: none;
+    margin: 10px;
+}
+
+input {
+    margin: 10px;
+    height: 30px;
+    box-sizing: border-box;
+    padding:8px 8px;
+    font-family: Arial;
+    background-color:  #f9f9f9;
+    box-shadow: inset 0px 1px 2px rgb(0 0 0 / 15%);
+    border: none;
+    border-radius: 3px;
+}
+input[type=text]{
+    display: block;
+}
+input:focus {
+    border: 2px solid #02906f;
+    outline:none;
+    }
+label {font-weight: bold;}
+.form-check-label {font-weight: 100;}
+.form-check-input {height: 20px;}
