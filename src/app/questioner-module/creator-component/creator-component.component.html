@@ -1,46 +1,54 @@
-<div class="div">
-<input (input)="inputHandler($event)">
-<button (click)="OpenQ()">OQ</button>
-<button (click)="CheckBoxQ()">CB</button>
-<button (click)="CheckBoxQComplete()">Очень плохая кнопка</button>
-<button (click)="RadioButtonQ()">RB</button>
-<button (click)="RadioButtonQComplete()">Очень плохая кнопка. Часть 2</button>
-<form (ngSubmit)="onSubmit()" #membershipForm="ngForm">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" 
-        id="name"
-        ngModel name="name">
-    </div>
-    <div class="form-group">
-        <div *ngFor="let item of openquestions; let i = index">
-            <strong>{{item.name}}</strong>
-            <input type="text" ngModel name="item.name">
+<div class="container">
+    <form [formGroup]="form">
+        <label for="title">Title:</label>
+        <input (input)="inputHandler($event)" formControlName="title" id="title" type="text"
+            [ngClass]="{'invalid': form.get('title')?.invalid && form.get('title')?.touched}">
+        <span class="helper-text" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
+            <span *ngIf="form.get('title')?.errors?.['required']">This field cannot be empty!</span>
+        </span>
+        <button class="btn" [disabled]="form.invalid || form.disabled" (click)="OpenQ()">OQ</button>
+        <button class="btn" [disabled]="form.invalid || form.disabled" (click)="CheckBoxQ()">CB</button>
+        <button class="btn" [disabled]="form.invalid || form.disabled" (click)="CheckBoxQComplete()">Очень плохая кнопка</button>
+        <button class="btn" [disabled]="form.invalid || form.disabled" (click)="RadioButtonQ()">RB</button>
+        <button class="btn" [disabled]="form.invalid || form.disabled" (click)="RadioButtonQComplete()">Очень плохая кнопка. Часть 2</button>
+    </form>
+    <form class="card" (ngSubmit)="onSubmit()" #membershipForm="ngForm">
+        <!-- <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" 
+            id="name"
+            ngModel name="name">
+        </div> -->
+        <div class="form-group">
+            <div *ngFor="let item of openquestions">
+                <strong>{{item.name}}</strong>
+                <input type="text" ngModel name="item.name">
+            </div>
+        <!-- <label>Favorite cardio exercises</label> -->
+        <div class="form-check" 
+            *ngFor="let checkboxes of checkboxquestions">
+            {{checkboxes.question}}
+            <div *ngFor="let checkbox of checkboxes.checkboxes; let j = index">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input"
+                     [name]="RBName">
+                    <span>{{checkbox.name}}</span>
+                </label>
+            </div>
         </div>
-      <label>Favorite cardio exercises</label>
-      <div class="form-check" 
-         *ngFor="let checkboxes of checkboxquestions; let i = index">
-         {{checkboxes.question}}
-         <div *ngFor="let checkbox of checkboxes.checkboxes; let j = index">
-            <label class="form-check-label">
-                <input type="checkbox" class="form-check-input"
-                ngModel name="{{checkbox.name}}">
-                {{checkbox.name}}
-            </label>
-         </div>
-      </div>
-      <div class="form-check" 
-         *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
-         {{radiobuttons.question}}
-         <div *ngFor="let radiobutton of radiobuttons.radiobuttons; let j = index">
-            <label class="form-check-label">
-                <input type="radio" class="form-check-input"
-                ngModel name="{{radiobutton.name}}">
-                {{radiobutton.name}}
-            </label>
-         </div>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
-</form>
+        <div class="form-check" 
+            *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
+            {{radiobuttons.question}}
+            <div *ngFor="let radiobutton of radiobuttons.radiobuttons; let j = index">
+                <label class="form-radiobutton-label">
+                    <input type="radio" class="form-check-input with-gap"
+                   [name]="RBName[i]">
+                <span>{{radiobutton.name}}</span>
+                </label>
+            </div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="button" (click)="Clear()" class="btn">Clear</button>
+    </form>
 </div>

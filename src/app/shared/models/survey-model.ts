@@ -1,7 +1,7 @@
 export class OpenQuestion {
     name: string;
-    static id: number = 0;
     text?: string;
+    id?: string;
     constructor(name: string) {
         this.name = name;
     }
@@ -9,9 +9,9 @@ export class OpenQuestion {
 
 export class CheckBox {
     name: string;
-    check: boolean;
+    check?: boolean;
     text?: string;
-    static id: number = 0
+    id?: string;
     constructor(name: string, check: boolean) {
         this.name = name;
         this.check = check;
@@ -29,9 +29,9 @@ export class CheckBoxQuestion {
 
 export class RadioButton {
     name: string;
-    check: boolean;
+    check?: boolean;
     text?: string;
-    static id: number = 0
+    id?: string;
     constructor(name: string, check: boolean) {
         this.name = name;
         this.check = check;
@@ -45,4 +45,11 @@ export class RadioButtonQuestion {
         this.question = question;
         this.radiobuttons = radiobutton;
     }
+}
+
+export interface Survey{
+    QType1: string
+    QType2: string
+    QType3: string
+    name: string
 }

@@ -5,7 +5,7 @@ export class Question {
         public form: FormGroup,
         public type: string,
         public title?: string,
-        public id?: number
+        public id?: string
     ) { }
 
     /*static getRoomInfo(obj: any) {

@@ -1,0 +1,28 @@
+<form class="card" (ngSubmit)="onSubmit()" >
+    <div class="form-group">
+        <div *ngFor="let item of openquestions; let i = index">
+            <strong>{{item.name}}</strong>
+            <input type="text" ngModel name="item.name">
+        </div>
+        <div class="form-check" *ngFor="let checkboxes of checkboxquestions; let i = index">
+            {{checkboxes.question}}
+            <div *ngFor="let checkbox of checkboxes.checkboxes; let j = index">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" [name]="RBName">
+                    <span>{{checkbox.name}}</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-check" *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
+            {{radiobuttons.question}}
+            <div *ngFor="let radiobutton of radiobuttons.radiobuttons; let j = index">
+                <label class="form-radiobutton-label">
+                    <input type="radio" class="form-check-input with-gap" [name]="RBName[i]">
+                    <span>{{radiobutton.name}}</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" (click)="Clear()" class="btn">Clear</button>
+</form>
