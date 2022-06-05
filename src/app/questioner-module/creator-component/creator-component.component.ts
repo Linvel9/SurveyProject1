@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, AbstractControl, NgModel, NgForm, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-
+import { MaterialService,MaterialInstance } from 'src/app/shared/classes/mclass';
+import { ElementRef } from "@angular/core";
 import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuestion, Survey } from 'src/app/shared/models/survey-model';
 import { Member } from 'src/app/shared/models/member-model';
 import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
@@ -18,6 +19,9 @@ import { json } from 'body-parser';
 
 export class CreatorComponentComponent implements OnInit {
   @ViewChild('membershipForm') memberForm!: NgForm
+  @ViewChild('select') selectRef!: ElementRef
+  select!: MaterialInstance
+  value: any
   openquestions: OpenQuestion[] = [];
   checkboxes: CheckBox[] = [];
   checkboxquestions: CheckBoxQuestion[] = [];
@@ -36,23 +40,40 @@ export class CreatorComponentComponent implements OnInit {
 
 
   constructor(private SurveyService: SurveyService,
-              private router: Router) {}
+              private router: Router
+              ) {}
 
   ngOnInit(): void {
      this.form = new FormGroup({
       title: new FormControl(null, Validators.required)
     })
   }
-
+  // ngAfterViewInit() {
+  //   this.select = MaterialService.selectFunc(this.selectRef)
+  // }
   inputHandler(event: any) {
     const value = event.target.value;
     this.title = value;
   }
+  // GetValSel(){
+  //   M.getSelectedValues();
+  // }
+  AddF(){
 
+  }
+  ChangeQ(index: any){
+    this.openquestions[index].name = this.title;
+  }
+  Da(){
+    this.value=1
+  }
+  Da1(){
+    this.value=2
+  }
   onSubmit(){
     
      this.questions.push(this.openquestions, this.checkboxquestions, this.radiobuttonquestions)
-     alert(this.openquestions[0].name)
+     console.log(this.questions)
      const SurveyC: Survey = {
       QType1: JSON.stringify(this.openquestions),
       QType2: JSON.stringify(this.checkboxquestions),
@@ -84,36 +105,44 @@ export class CreatorComponentComponent implements OnInit {
 // onSubmit() {
 //     this.socketService.sendMessage(this.message, this.userNickname);
 // }
-
   OpenQ() {
     let openquestion: OpenQuestion = new OpenQuestion(this.title);
     this.openquestions.push(openquestion);
     this.form.reset();
   }
+  DeleteCB(i:any,j:any){
+    this.checkboxquestions[i].checkboxes.splice(j,1)
 
-  CheckBoxQ() {
-    let checkbox: CheckBox = new CheckBox(this.title, false);
+  }
+  DeleteRB(i:any,j:any){
+    this.radiobuttonquestions[i].radiobuttons.splice(j,1)
+
+  }
+  CheckBoxQ(index:any) {
+    let checkbox: CheckBox = new CheckBox();
     this.checkboxes.push(checkbox);
-    this.form.reset();
+    this.checkboxquestions[index].checkboxes=this.checkboxes
+    
   }
 
   CheckBoxQComplete() {
-    this.checkboxquestions.push(new CheckBoxQuestion(this.title, this.checkboxes))
+    this.checkboxquestions.push(new CheckBoxQuestion())
     this.checkboxes = [];
-    this.form.reset();
+    
   }
 
-  RadioButtonQ() {
-    let radiobutton: RadioButton = new RadioButton(this.title, false);
+  RadioButtonQ(index:any) {
+    let radiobutton: RadioButton = new RadioButton();
     this.radiobutton.push(radiobutton);
-    this.form.reset();
+    this.radiobuttonquestions[index].radiobuttons=this.radiobutton
+    ;
   }
 
   RadioButtonQComplete() {
     this.RBName.push(this.number);
-    this.radiobuttonquestions.push(new RadioButtonQuestion(this.title, this.radiobutton))
+    this.radiobuttonquestions.push(new RadioButtonQuestion())
     this.radiobutton = [];
-    this.form.reset();
+    
     this.number++
   }
 
