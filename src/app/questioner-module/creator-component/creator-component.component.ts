@@ -7,9 +7,7 @@ import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuest
 import { Member } from 'src/app/shared/models/member-model';
 import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
 import { Subscription } from 'rxjs';
-import { Question } from 'src/app/shared/models/question-model';
 import { Router } from '@angular/router';
-import { json } from 'body-parser';
 
 @Component({
   selector: 'app-creator-component',
@@ -36,7 +34,13 @@ export class CreatorComponentComponent implements OnInit {
   RBName: number[] = [];
   number: number = 0;
   questions: any = [];
-  title!: string;
+  title: string = "0";
+  OpenQTitle: string[] = []
+  CheckBoxQTitle: string[] = []
+  CheckBoxQName: string[][] = [[],[]]
+  RadioButtonQTitle: string[] = []
+  RadioButtonQName: string[][] =[[],[]]
+
 
 
   constructor(private SurveyService: SurveyService,
@@ -45,7 +49,8 @@ export class CreatorComponentComponent implements OnInit {
 
   ngOnInit(): void {
      this.form = new FormGroup({
-      title: new FormControl(null, Validators.required)
+      title: new FormControl(null, Validators.required),
+      OpenQTitle: new FormControl(null, Validators.required)
     })
   }
   // ngAfterViewInit() {
@@ -54,31 +59,19 @@ export class CreatorComponentComponent implements OnInit {
   inputHandler(event: any) {
     const value = event.target.value;
     this.title = value;
+
   }
   // GetValSel(){
   //   M.getSelectedValues();
   // }
-  AddF(){
+ 
 
-  }
-  ChangeQ(index: any){
-    this.openquestions[index].name = this.title;
-  }
-  Da(){
-    this.value=1
-  }
-  Da1(){
-    this.value=2
-  }
   onSubmit(){
     
-     this.questions.push(this.openquestions, this.checkboxquestions, this.radiobuttonquestions)
-     console.log(this.questions)
+     //this.questions.push(this.openquestions, this.checkboxquestions, this.radiobuttonquestions)
+     alert(JSON.stringify(this.memberForm.value))
      const SurveyC: Survey = {
-      QType1: JSON.stringify(this.openquestions),
-      QType2: JSON.stringify(this.checkboxquestions),
-      QType3: JSON.stringify(this.radiobuttonquestions),
-      name: this.openquestions[0].name
+      Survey: JSON.stringify(this.memberForm.value)
     }
     this.aSub = this.SurveyService.createSurvey(SurveyC)
        .subscribe(
@@ -108,7 +101,6 @@ export class CreatorComponentComponent implements OnInit {
   OpenQ() {
     let openquestion: OpenQuestion = new OpenQuestion(this.title);
     this.openquestions.push(openquestion);
-    this.form.reset();
   }
   DeleteCB(i:any,j:any){
     this.checkboxquestions[i].checkboxes.splice(j,1)

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const SurveyCreateRoutes = require('./routes/surveys')
 const app = express()
 
-mongoose.connect('backend key here')
+mongoose.connect('asdsa')
 .then(() => console.log("MongoDb connected"))
 .catch(err => console.log(err));
 

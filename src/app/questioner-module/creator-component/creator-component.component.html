@@ -20,35 +20,41 @@
         <div class="form-group">
             <div *ngFor="let item of openquestions; let i = index">
                 <strong>Вопрос:</strong>
-                <input input (input)="inputHandler($event)" formControlName="title" id="title" type="text">
+                <input class="form-control" name="OpenQTitle[{{i}}]" [(ngModel)]="OpenQTitle[i]" value="OpenQTitle[i]"  type="text">
             </div>
-            <!-- <label>Favorite cardio exercises</label> -->
             <div class="form-check" *ngFor="let checkboxes of checkboxquestions; let i = index ">
                 <strong>Вопрос:</strong>
-                <input input (input)="inputHandler($event)" formControlName="title" id="title" type="text">
-                <button (click)="CheckBoxQ(i)">Добавить чекбокс</button>
+                <input input name="CheckBoxQTitle[{{i}}]" [(ngModel)]="CheckBoxQTitle[i]" id="CheckBoxQTitle" type="text">
+                <button type="button" (click)="CheckBoxQ(i)">Добавить чекбокс</button>
                 <div *ngFor="let checkbox of checkboxes.checkboxes; let j = index">
                     <label class="form-check-label">
                         <strong>Имя чекбокса</strong>
-                        <input type="text" class="form-check-input" [name]="RBName">
-                        <button (click)="DeleteCB(i,j)">Удалить чекбокс</button>
+                        <div style="display: flex; flex-direction: row;">
+                        <input type="text" class="form-check-input" name="CheckBoxQName[{{i}}][{{j}}]" [(ngModel)]="CheckBoxQName[i][j]" id="CheckBoxQName" >
+                        <button (click)="DeleteCB(i,j)"><i class="material-icons">delete_sweep</i></button>
+                        </div>
                     </label>
                 </div>
             </div>
             <div class="form-check" *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
                 <strong>Вопрос:</strong>
-                <input input (input)="inputHandler($event)" formControlName="title" id="title" type="text">
-                <button (click)="RadioButtonQ(i)">Добавить радиокнопку</button>
+                <input name="RadioButtonQTitle[{{i}}]" [(ngModel)]="RadioButtonQTitle[i]" id="RadioButtonQTitle" type="text">
+                <button type="button" (click)="RadioButtonQ(i)">Добавить радиокнопку</button>
                 <div *ngFor="let radiobutton of radiobuttons.radiobuttons; let j = index">
                     <label class="form-radiobutton-label">
                         <strong>Имя радиокнопки</strong>
-                        <input type="text" class="form-check-input with-gap" [name]="RBName[i]">
-                        <button (click)="DeleteRB(i,j)">Удалить радиокнопку</button>
+                        <input type="text" class="form-check-input with-gap"  name="RadioButtonQName[{{i}}][{{j}}]" [(ngModel)]="RadioButtonQName[i][j]" id="RadioButtonQName" >
+                        <button (click)="DeleteRB(i,j)"><i class="material-icons">delete_sweep</i></button>
                     </label>
                 </div>
             </div>
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
         <button type="button" (click)="Clear()" class="btn">Clear</button>
+        <label>
+            <input type="checkbox">
+            <span>Red</span>
+        </label>
+        
     </form>
 </div>

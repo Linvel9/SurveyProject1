@@ -18,7 +18,7 @@ export class CheckBox {
 
 export class CheckBoxQuestion {
     question?: string;
-    checkboxes!: CheckBox[]
+    checkboxes! : CheckBox[]
     constructor() {
     }
 }
@@ -40,8 +40,5 @@ export class RadioButtonQuestion {
 }
 
 export interface Survey{
-    QType1: string
-    QType2: string
-    QType3: string
-    name: string
+    Survey: string
 }

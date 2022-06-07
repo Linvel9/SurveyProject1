@@ -4,10 +4,7 @@ const errorHandler = require('../utils/ErrorHandler')
 module.exports.create = async function(req, res) {
     try {
     const survey = await new Survey({
-        name: req.body.name,
-        QType1: req.body.QType1,
-        QType2: req.body.QType2,
-        QType3: req.body.QType3,
+        Survey: req.body.Survey
     }).save()
     res.status(201).json(survey)
 } catch (e) {
