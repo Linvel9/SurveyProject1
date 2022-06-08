@@ -18,7 +18,7 @@
             <p>{{radiobuttons.question}}</p>
             <div *ngFor="let item of radiobuttons.radiobuttons; let j = index">
                 <label>
-                    <input type="radio">
+                    <input type="radio" [name]="i">
                     <span>{{item.name}}</span>
                 </label>
             </div>
