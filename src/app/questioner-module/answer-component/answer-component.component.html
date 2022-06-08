@@ -1,22 +1,28 @@
-<div>
-    <div *ngFor="let item of openquestions; let i = index">
-        <p>{{item.name}}</p>
-        <input>
-    </div>
-    <div *ngFor="let checkboxes of checkboxquestions; let i = index ">
-        <p>{{checkboxes.question}}</p>
-        <div ngFor="let checkbox of checkboxes.checkboxes; let j = index">
-            <label class="form-check-label">
-                <input type="checkbox" >
-            </label>
+<div class="container">
+    <form class="card">
+    <div class="form-group">
+        <div *ngFor="let item of openquestions; let i = index">
+            <p>{{item.name}}</p>
+            <input>
+        </div>
+        <div *ngFor="let checkboxes of checkboxquestions; let i = index ">
+            <p>{{checkboxes.question}}</p>
+            <div *ngFor="let item of checkboxes.checkboxes; let j = index">
+                <label>
+                    <input type="checkbox">
+                    <span>{{item.name}}</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-check" *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
+            <p>{{radiobuttons.question}}</p>
+            <div *ngFor="let item of radiobuttons.radiobuttons; let j = index">
+                <label>
+                    <input type="radio">
+                    <span>{{item.name}}</span>
+                </label>
+            </div>
         </div>
     </div>
-    <div class="form-check" *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
-        <p>{{radiobuttons.question}}</p>
-        <div *ngFor="let radiobutton of radiobuttons.radiobuttons; let j = index">
-            <label class="form-check-label">
-                <input type="radio" class="form-check-input" value="radiobutton.name">
-            </label>
-        </div>
-    </div>
+    </form>
 </div>

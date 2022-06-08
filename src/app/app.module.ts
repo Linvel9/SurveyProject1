@@ -7,11 +7,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CreatorComponentComponent } from './questioner-module/creator-component/creator-component.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
+import { AnswerComponentComponent } from './questioner-module/answer-component/answer-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreatorComponentComponent,
+    AnswerComponentComponent,
     SiteLayoutComponent
   ],
   imports: [
