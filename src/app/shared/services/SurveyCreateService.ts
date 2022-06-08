@@ -9,8 +9,11 @@ import { Survey } from "../models/survey-model";
 })
 
 export class SurveyService {
-    constructor(private http: HttpClient) {
-        
+    constructor(private http: HttpClient) {    
+    }
+
+     getSurvey(): Observable<Survey[]> {
+        return this.http.get<Survey[]>('/api/surveys')
     }
 
     createSurvey(survey: Survey): Observable<Survey>{

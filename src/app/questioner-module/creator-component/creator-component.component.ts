@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, AbstractControl, NgModel, NgForm, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
-import { MaterialService,MaterialInstance } from 'src/app/shared/classes/mclass';
+import { MaterialService, MaterialInstance } from 'src/app/shared/classes/mclass';
 import { ElementRef } from "@angular/core";
 import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuestion, Survey } from 'src/app/shared/models/survey-model';
 import { Member } from 'src/app/shared/models/member-model';
@@ -75,7 +75,9 @@ export class CreatorComponentComponent implements OnInit {
     }
     this.aSub = this.SurveyService.createSurvey(SurveyC)
        .subscribe(
-    () => alert("Added successfully!")
+    () => MaterialService.toast("Анкета добавлена. Успех!", "good"),
+    error => {MaterialService.toast(error.statusText, "danger")
+    console.warn(error)}
   )
     // this.submitted = true;
     // this.member.name = this.memberForm.value.name;
@@ -142,8 +144,11 @@ export class CreatorComponentComponent implements OnInit {
     this.openquestions = []
     this.radiobuttonquestions = []
     this.checkboxquestions = []
-    this.questions = []
-    this.form.reset()
+    this.OpenQTitle = []
+    this.CheckBoxQTitle = []
+    this.CheckBoxQName = []
+    this.RadioButtonQTitle = []
+    this.RadioButtonQName = []
   }
 //   createExercises(exerciseList: any): FormArray {
 //     const arr = exerciseList.map((exercise: any) => {

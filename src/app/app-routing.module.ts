@@ -6,6 +6,7 @@ import { CreatorComponentComponent } from './questioner-module/creator-component
 
 const routes: Routes = [
   {path: '', component: SiteLayoutComponent, children: [
+    { path: '', redirectTo: '/creator', pathMatch: 'full'},
     { path: 'creator', component: CreatorComponentComponent },
     { path: 'answer', component: AnswerComponentComponent },
   ] },

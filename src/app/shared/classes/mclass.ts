@@ -7,7 +7,11 @@ export interface MaterialInstance {
 }
 export class MaterialService {
     static selectFunc() {
-        var elems = document.querySelectorAll('select');
-        var instances = M.FormSelect.init(elems);
+        var elem = document.querySelectorAll('/select');
+        var instance = M.FormSelect.init(elem);
+    }
+
+    static toast(message: string, myClass: string) {
+    M.toast({ html: message, classes: myClass})
     }
 }

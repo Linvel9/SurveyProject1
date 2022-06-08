@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const SurveyCreateRoutes = require('./routes/surveys')
 const app = express()
 
-mongoose.connect('asdsa')
+mongoose.connect('asdsadad')
 .then(() => console.log("MongoDb connected"))
 .catch(err => console.log(err));
 

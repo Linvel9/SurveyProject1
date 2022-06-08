@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~materialize-css/dist/css/materialize.min.css";
+
+.good {
+    background-color: #4caf50;
+    color: #e8f5e9;
+}
+
+.danger {
+    background-color: #b71c1c;
+    color: #e8f5e9;
+}
