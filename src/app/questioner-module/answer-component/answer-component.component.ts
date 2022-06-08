@@ -1,53 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray, AbstractControl, NgModel, NgForm, Validators } from '@angular/forms';
-import { ViewChild } from '@angular/core';
-
-import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuestion } from 'src/app/shared/models/survey-model';
-import { Member } from 'src/app/shared/models/member-model';
+import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuestion, Survey } from 'src/app/shared/models/survey-model';
+import { NgModel } from '@angular/forms';
+import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
 
 @Component({
-  selector: 'app-answer-component',
+  selector: 'app-yes',
   templateUrl: './answer-component.component.html',
   styleUrls: ['./answer-component.component.scss']
 })
-
 export class AnswerComponentComponent implements OnInit {
- @ViewChild('membershipForm') memberForm!: NgForm
-  openquestions: OpenQuestion[] = [];
-  checkboxes: CheckBox[] = [];
-  checkboxquestions: CheckBoxQuestion[] = [];
-  radiobutton: RadioButton[] = [];
-  radiobuttonquestions: RadioButtonQuestion[] = [];
-  member = new Member('', []);
-  submitted = false;
-  form!: FormGroup;
+  blya:any[] = [];
+  survey!:object
+  openquestions: OpenQuestion[] = [{name:"Это вопрос 1"},{name:"Это вопрос 2"}];
+  checkboxquestions: CheckBoxQuestion[] = [{question:"Это вопрос с выбором",checkboxes:[{name:"Это выбор первый"},{name:"Это выбор второй"}]}];
+  radiobuttonquestions: RadioButtonQuestion[] = [{question:"Это вопрос с выбором 2",radiobuttons:[{name:"Это выбор первый"},{name:"Это выбор второй"}]}];
 
-  RBName: number[] = [];
-  number: number = 0;
-  count: number = 0;
-  questions: any = [];
-  title!: string;
-  constructor() { }
 
- ngOnInit(): void {
-     this.form = new FormGroup({
-      title: new FormControl(null, Validators.required)
+  arr:string[] =["asdasd","asdasdasd"]
+  constructor(private surveyService:SurveyService) { }
+
+  ngOnInit(): void {
+    let suka = this.surveyService.getSurvey().subscribe((item:Survey[])=>{
+      this.survey = JSON.parse(item[0].Survey)
+      for (var key in this.survey) {
+        console.log(key + ' ' + this.survey[0]);
+      }
+      //console.log(this.survey)
     })
   }
 
-  inputHandler(event: any) {
-    const value = event.target.value;
-    this.title = value;
-  }
-
-  onSubmit(){
-  }
-
- 
-  Clear() {
-    this.openquestions = []
-    this.radiobuttonquestions = []
-    this.checkboxquestions = []
-    this.form.reset()
-  }
 }

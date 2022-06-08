@@ -15,7 +15,7 @@ module.exports.create = async function(req, res) {
 module.exports.getByID = async function(req, res) {
     try{
         const survey = await Survey.find({
-            Survey: req.params.SurveysId
+            Surveys: req.params.SurveysId
         })
         res.status(200).json(survey)
     } catch (e) {
