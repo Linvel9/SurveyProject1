@@ -13,14 +13,14 @@
     <form class="card" (ngSubmit)="onSubmit()" #membershipForm="ngForm">
         <!-- <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" 
+        <input type="text" class="form-control"
             id="name"
             ngModel name="name">
         </div> -->
-        <div class="form-group">
+        <div style="margin: 25px;">
             <div *ngFor="let item of openquestions; let i = index">
                 <strong>Вопрос:</strong>
-                <input class="form-control" name="OpenQTitle[{{i}}]" [(ngModel)]="OpenQTitle[i]"  type="text">
+                <input name="OpenQTitle[{{i}}]" [(ngModel)]="OpenQTitle[i]"  type="text">
             </div>
             <div class="form-check" *ngFor="let checkboxes of checkboxquestions; let i = index ">
                 <strong>Вопрос:</strong>

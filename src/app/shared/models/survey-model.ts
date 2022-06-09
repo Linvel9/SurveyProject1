@@ -8,8 +8,8 @@ export class OpenQuestion {
 }
 
 export class CheckBox {
-    name?: string;
-    check?: boolean;
+    name!: string;
+    check?: boolean = false;
     text?: string;
     id?: string;
     constructor() {
@@ -17,15 +17,15 @@ export class CheckBox {
 }
 
 export class CheckBoxQuestion {
-    question?: string;
+    question!: string;
     checkboxes! : CheckBox[]
     constructor() {
     }
 }
 
 export class RadioButton {
-    name?: string;
-    check?: boolean;
+    name!: string;
+    check?: number = 0;
     text?: string;
     id?: string;
     constructor() {
@@ -33,7 +33,7 @@ export class RadioButton {
 }
 
 export class RadioButtonQuestion {
-    question?: string;
+    question!: string;
     radiobuttons!: RadioButton[]
     constructor() {
     }

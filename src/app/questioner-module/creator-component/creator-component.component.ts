@@ -26,7 +26,6 @@ export class CreatorComponentComponent implements OnInit {
   radiobutton: RadioButton[] = [];
   radiobuttonquestions: RadioButtonQuestion[] = [];
   member = new Member('', []);
-  //submitted = false;
   form!: FormGroup;
   aSub!: Subscription;
   survey!: Survey;
@@ -37,11 +36,9 @@ export class CreatorComponentComponent implements OnInit {
   title: string = "0";
   OpenQTitle: string[] = []
   CheckBoxQTitle: string[] = []
-  CheckBoxQName: string[][] = [[],[]]
+  CheckBoxQName: string[][] = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
   RadioButtonQTitle: string[] = []
-  RadioButtonQName: string[][] =[[],[]]
-
-
+  RadioButtonQName: string[][] = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
 
   constructor(private SurveyService: SurveyService,
               private router: Router

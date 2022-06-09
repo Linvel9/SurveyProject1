@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuestion, Survey } from 'src/app/shared/models/survey-model';
-import { NgModel } from '@angular/forms';
+import { FormGroup, NgForm, NgModel } from '@angular/forms';
 import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
+import { CheckBoxAnswers, RadioButtonAnswers } from 'src/app/shared/models/answer-model';
+import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-yes',
@@ -9,10 +11,16 @@ import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
   styleUrls: ['./answer-component.component.scss']
 })
 export class AnswerComponentComponent implements OnInit {
+  @ViewChild('answerForm') answerForm!: NgForm
   survey!:object
   openquestions: OpenQuestion[] = [];
+  OpenQuestion: string[] = [];
   checkboxquestions: CheckBoxQuestion[] = [];
+  CheckBox: string[][] = [];
+  CheckBoxAnswers: CheckBoxAnswers[] = [];
   radiobuttonquestions: RadioButtonQuestion[] = [];
+  RadioButton:string[][] = [];
+  RadioButtonAnswers: RadioButtonAnswers[] = [];
   
   constructor(private surveyService:SurveyService) { }
 
@@ -20,9 +28,7 @@ export class AnswerComponentComponent implements OnInit {
     let suka = this.surveyService.getSurvey().subscribe((item:Survey[])=>{
       this.survey = JSON.parse(item[0].Survey)
       const entries = Object.entries(this.survey)
-      //console.log(entries)
       for (var key in entries) {
-        //console.log(entries[key]);
         if(entries[key][0].includes('OpenQTitle'))
         {
           this.openquestions.push(new OpenQuestion(entries[key][1]))
@@ -31,9 +37,13 @@ export class AnswerComponentComponent implements OnInit {
         {
           let checkBoxQuestion: CheckBoxQuestion = new CheckBoxQuestion()
           let checkBoxes:CheckBox[] = []
+
+          let checkBoxAnswers: CheckBoxAnswers = new CheckBoxAnswers()
+          checkBoxAnswers.name = entries[key][1]
+          this.CheckBoxAnswers.push(checkBoxAnswers)
+
           let key0 = entries[key][0]
           key0 = key0[key0.length - 2]
-          //console.log(key0)
           for (var chbx in entries)
           {
             if(entries[chbx][0].includes('CheckBoxQName[' + key0 + ']'))
@@ -53,7 +63,6 @@ export class AnswerComponentComponent implements OnInit {
           let radioButtons:RadioButton[] = []
           let key0 = entries[key][0]
           key0 = key0[key0.length - 2]
-          //console.log(key0)
           for (var chbx in entries)
           {
             if(entries[chbx][0].includes('RadioButtonQName[' + key0 + ']'))
@@ -69,9 +78,35 @@ export class AnswerComponentComponent implements OnInit {
         }
       }
     })
-    //console.log(this.openquestions)
-    //console.log(this.checkboxquestions)
-    //console.log(this.radiobuttonquestions)
   }
 
+  onSubmit()
+  {
+    //alert(JSON.stringify(this.checkboxquestions))
+    this.checkboxquestions.forEach((elemenet) => {
+      let strArray:string[] = []
+      strArray.push(elemenet.question)
+      elemenet.checkboxes.forEach((chbx) => {
+        if(chbx.check)
+        {
+          strArray.push(chbx.name)
+        }
+      })
+      this.CheckBox.push(strArray)
+    })
+    //console.log(this.CheckBox)
+
+    this.radiobuttonquestions.forEach((elemenet) => {
+      let strArray:string[] = []
+      strArray.push(elemenet.question)
+      elemenet.radiobuttons.forEach((rdbt) => {
+        if(rdbt.check == 1)
+        {
+          strArray.push(rdbt.name)
+        }
+      })
+      this.RadioButton.push(strArray)
+    })
+    console.log(this.RadioButton)
+  }
 }

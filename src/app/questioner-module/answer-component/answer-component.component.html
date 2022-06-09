@@ -1,28 +1,33 @@
-<div class="container">
-    <form class="card">
-    <div class="form-group">
-        <div *ngFor="let item of openquestions; let i = index">
-            <p>{{item.name}}</p>
-            <input>
-        </div>
-        <div *ngFor="let checkboxes of checkboxquestions; let i = index ">
-            <p>{{checkboxes.question}}</p>
-            <div *ngFor="let item of checkboxes.checkboxes; let j = index">
-                <label>
-                    <input type="checkbox">
-                    <span>{{item.name}}</span>
-                </label>
+<div>
+    <div class="container">
+        <form class="card" (ngSubmit)="onSubmit()" #answerForm="ngForm">
+        <div class="form-group">
+            <div *ngFor="let item of openquestions; let i = index">
+                <p>{{item.name}}</p>
+                <input name="OpenQuestion[{{i}}]" [(ngModel)]="OpenQuestion[i]">
+            </div>
+            <div *ngFor="let checkboxes of checkboxquestions; let i = index ">
+                <p>{{checkboxes.question}}</p>
+                <div *ngFor="let item of checkboxes.checkboxes; let j = index">
+                    <label>
+                        <input type="checkbox" checked="false" name="item.name" [(ngModel)]="item.check">
+                        <span>{{item.name}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-check" *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
+                <p>{{radiobuttons.question}}</p>
+                <div *ngFor="let item of radiobuttons.radiobuttons; let j = index">
+                    <label>
+                        <input type="radio" checked="false" name="{{i}}" [(ngModel)]="item.check" value="{{j}}">
+                        <span>{{item.name}}</span>
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="form-check" *ngFor="let radiobuttons of radiobuttonquestions; let i = index">
-            <p>{{radiobuttons.question}}</p>
-            <div *ngFor="let item of radiobuttons.radiobuttons; let j = index">
-                <label>
-                    <input type="radio" [name]="i">
-                    <span>{{item.name}}</span>
-                </label>
-            </div>
+        <div>
+            <button style="margin-top: 30px;" type="submit" class="waves-effect waves-light btn">Отправить</button>
         </div>
+        </form>
     </div>
-    </form>
 </div>
