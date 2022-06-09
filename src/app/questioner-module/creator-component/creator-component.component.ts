@@ -101,25 +101,38 @@ export class CreatorComponentComponent implements OnInit {
     let openquestion: OpenQuestion = new OpenQuestion(this.title);
     this.openquestions.push(openquestion);
   }
+
+  DeleteOpenQ(i:any)
+  {
+    this.openquestions.splice(i);
+  }
+
+  DeleteCBQ(i:any){
+    this.checkboxquestions.splice(i)
+  }
+
   DeleteCB(i:any,j:any){
     this.checkboxquestions[i].checkboxes.splice(j,1)
-
   }
+
   DeleteRB(i:any,j:any){
     this.radiobuttonquestions[i].radiobuttons.splice(j,1)
-
   }
+
+  DeleteRBQ(i:any)
+  {
+    this.radiobuttonquestions.splice(i);
+  }
+
   CheckBoxQ(index:any) {
     let checkbox: CheckBox = new CheckBox();
     this.checkboxes.push(checkbox);
     this.checkboxquestions[index].checkboxes=this.checkboxes
-    
   }
 
   CheckBoxQComplete() {
     this.checkboxquestions.push(new CheckBoxQuestion())
     this.checkboxes = [];
-    
   }
 
   RadioButtonQ(index:any) {

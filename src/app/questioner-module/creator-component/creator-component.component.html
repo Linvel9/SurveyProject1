@@ -21,12 +21,14 @@
             <div *ngFor="let item of openquestions; let i = index">
                 <strong>Вопрос:</strong>
                 <input name="OpenQTitle[{{i}}]" [(ngModel)]="OpenQTitle[i]"  type="text">
+                <button type="button" (click)="DeleteOpenQ(i)"><i class="material-icons">delete_sweep</i></button>
             </div>
             <div class="form-check" *ngFor="let checkboxes of checkboxquestions; let i = index ">
                 <strong>Вопрос:</strong>
                 <div style="display: flex; flex-direction: row;">
                 <input input name="CheckBoxQTitle[{{i}}]" [(ngModel)]="CheckBoxQTitle[i]" id="CheckBoxQTitle" type="text">
                 <button type="button" (click)="CheckBoxQ(i)"><i class="material-icons">add check_box</i></button>
+                <button type="button" (click)="DeleteCBQ(i)"><i class="material-icons">delete_sweep</i></button>
                 </div>
                 <div *ngFor="let checkbox of checkboxes.checkboxes; let j = index">
                     <label class="form-check-label">
@@ -42,8 +44,8 @@
                 <strong>Вопрос:</strong>
                 <div style="display: flex; flex-direction: row;">
                 <input name="RadioButtonQTitle[{{i}}]" [(ngModel)]="RadioButtonQTitle[i]" id="RadioButtonQTitle" type="text">
-                <button type="button" (click)="RadioButtonQ(i)"><i class="material-icons">add radio_button_checked</i>
-                </button>
+                <button type="button" (click)="RadioButtonQ(i)"><i class="material-icons">add radio_button_checked</i></button>
+                <button type="button" (click)="DeleteRBQ(i)"><i class="material-icons">delete_sweep</i></button>
                 </div>
                 <div *ngFor="let radiobutton of radiobuttons.radiobuttons; let j = index">
                     <label class="form-radiobutton-label">
@@ -57,11 +59,6 @@
             </div>
         </div>
         <button type="submit" class="btn btn-success">Подтвердить</button>
-        <button type="button" (click)="Clear()" class="btn">Очистить</button>
-        <label>
-            <input type="checkbox">
-            <span>Я чекбокс :)</span>
-        </label>
-        
+        <button type="button" (click)="Clear()" class="btn">Очистить</button>        
     </form>
 </div>
