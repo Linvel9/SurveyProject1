@@ -15,7 +15,7 @@ module.exports.create = async function(req, res) {
 module.exports.getByID = async function(req, res) {
     try{
         const answer = await Answer.find({
-            _id: req.params.id
+            answers: req.body.Answer
         })
         res.status(200).json(answer)
     } catch (e) {
