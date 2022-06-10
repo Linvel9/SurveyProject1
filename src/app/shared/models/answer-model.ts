@@ -12,6 +12,12 @@ export class RadioButtonAnswers {
     }
 }
 
+export class UserAnswers {
+    OpenAnswers!: string[];
+    CheckBoxAnswers!: string[][];
+    RadioButtonAnswers!: string[][];
+}
+
 export interface Answer{
     Answer: string
 }
