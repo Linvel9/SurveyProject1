@@ -3,7 +3,7 @@ import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuest
 import { MaterialService, MaterialInstance } from 'src/app/shared/classes/mclass';
 import { NgForm} from '@angular/forms';
 import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
-import { Answer, CheckBoxAnswers, RadioButtonAnswers } from 'src/app/shared/models/answer-model';
+import { Answer, CheckBoxAnswers, RadioButtonAnswers, UserAnswers } from 'src/app/shared/models/answer-model';
 import { SurveyAnswerService } from 'src/app/shared/services/SueveyAnswerService';
 
 @Component({
@@ -22,7 +22,6 @@ export class AnswerComponentComponent implements OnInit {
   radiobuttonquestions: RadioButtonQuestion[] = [];
   RadioButton:string[][] = [];
   RadioButtonAnswers: RadioButtonAnswers[] = [];
-  Musor!: string[][][] //что это?
   
   constructor(private surveyService:SurveyService,
               private answerService:SurveyAnswerService) { }
@@ -96,7 +95,6 @@ export class AnswerComponentComponent implements OnInit {
       })
       this.CheckBox.push(strArray)
     })
-    this.Musor.push(this.CheckBox)
 
     this.radiobuttonquestions.forEach((elemenet) => {
       let strArray:string[] = []
@@ -105,14 +103,19 @@ export class AnswerComponentComponent implements OnInit {
         if(rdbt.check == 1)
         {
           strArray.push(rdbt.name)
+          console.log(strArray)
         }
       })
       this.RadioButton.push(strArray)
     })
-    this.Musor.push(this.RadioButton)
 
+    const answer: UserAnswers = new UserAnswers();
+    answer.OpenAnswers = this.OpenQuestion;
+    answer.CheckBoxAnswers = this.CheckBox;
+    answer.RadioButtonAnswers = this.RadioButton;
+    console.log(answer)
          const Answers: Answer = {
-      Answer: JSON.stringify(this.Musor),
+      Answer: JSON.stringify(answer),
     }
     this.answerService.saveAsnwer(Answers)
        .subscribe(
@@ -120,19 +123,6 @@ export class AnswerComponentComponent implements OnInit {
     error => {MaterialService.toast(error.statusText, "danger")
     console.warn(error)}
   )
-    //alert(JSON.stringify(this.checkboxquestions))
-  }
-
-  DeleteSurvey(){
-    console.log(this.answerForm.value.OpenQTitle)
-  //   this.surveyService.getSurvey().subscribe((item:Survey[])=>{
-  //   this.surveys = item[0].Survey}
-  //   // this.surveyService.deleteSurvey(survey).subscribe(
-  //   //   () => {
-  //   //     const idx = this.surveys.findIndex(p => p.id === survey.id)
-  //   //     this.surveys.splice(idx, 1)
-  // //   //     MaterialService.toast("ОФигеть оно работает", "good")
-  // //     }
-  //  )
+    alert(JSON.stringify(this.checkboxquestions))
   }
 }
