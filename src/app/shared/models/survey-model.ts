@@ -41,4 +41,5 @@ export class RadioButtonQuestion {
 
 export interface Survey{
     Survey: string
+    id?: string
 }

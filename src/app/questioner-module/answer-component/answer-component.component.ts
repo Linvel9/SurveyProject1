@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OpenQuestion, CheckBox, CheckBoxQuestion, RadioButton, RadioButtonQuestion, Survey } from 'src/app/shared/models/survey-model';
-import { FormGroup, NgForm, NgModel } from '@angular/forms';
+import { MaterialService, MaterialInstance } from 'src/app/shared/classes/mclass';
+import { NgForm} from '@angular/forms';
 import { SurveyService } from 'src/app/shared/services/SurveyCreateService';
-import { CheckBoxAnswers, RadioButtonAnswers } from 'src/app/shared/models/answer-model';
-import { elementAt } from 'rxjs';
+import { Answer, CheckBoxAnswers, RadioButtonAnswers } from 'src/app/shared/models/answer-model';
+import { SurveyAnswerService } from 'src/app/shared/services/SueveyAnswerService';
 
 @Component({
   selector: 'app-yes',
@@ -21,8 +22,10 @@ export class AnswerComponentComponent implements OnInit {
   radiobuttonquestions: RadioButtonQuestion[] = [];
   RadioButton:string[][] = [];
   RadioButtonAnswers: RadioButtonAnswers[] = [];
+  Musor!: string[][][] //что это?
   
-  constructor(private surveyService:SurveyService) { }
+  constructor(private surveyService:SurveyService,
+              private answerService:SurveyAnswerService) { }
 
   ngOnInit(): void {
     let suka = this.surveyService.getSurvey().subscribe((item:Survey[])=>{
@@ -82,7 +85,6 @@ export class AnswerComponentComponent implements OnInit {
 
   onSubmit()
   {
-    //alert(JSON.stringify(this.checkboxquestions))
     this.checkboxquestions.forEach((elemenet) => {
       let strArray:string[] = []
       strArray.push(elemenet.question)
@@ -94,7 +96,7 @@ export class AnswerComponentComponent implements OnInit {
       })
       this.CheckBox.push(strArray)
     })
-    //console.log(this.CheckBox)
+    this.Musor.push(this.CheckBox)
 
     this.radiobuttonquestions.forEach((elemenet) => {
       let strArray:string[] = []
@@ -107,6 +109,30 @@ export class AnswerComponentComponent implements OnInit {
       })
       this.RadioButton.push(strArray)
     })
-    console.log(this.RadioButton)
+    this.Musor.push(this.RadioButton)
+
+         const Answers: Answer = {
+      Answer: JSON.stringify(this.Musor),
+    }
+    this.answerService.saveAsnwer(Answers)
+       .subscribe(
+    () => MaterialService.toast("Ваши результаты записаны", "good"),
+    error => {MaterialService.toast(error.statusText, "danger")
+    console.warn(error)}
+  )
+    //alert(JSON.stringify(this.checkboxquestions))
+  }
+
+  DeleteSurvey(){
+    console.log(this.answerForm.value.OpenQTitle)
+  //   this.surveyService.getSurvey().subscribe((item:Survey[])=>{
+  //   this.surveys = item[0].Survey}
+  //   // this.surveyService.deleteSurvey(survey).subscribe(
+  //   //   () => {
+  //   //     const idx = this.surveys.findIndex(p => p.id === survey.id)
+  //   //     this.surveys.splice(idx, 1)
+  // //   //     MaterialService.toast("ОФигеть оно работает", "good")
+  // //     }
+  //  )
   }
 }

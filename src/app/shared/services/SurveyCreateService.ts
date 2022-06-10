@@ -19,4 +19,8 @@ export class SurveyService {
     createSurvey(survey: Survey): Observable<Survey>{
         return this.http.post<Survey>('/api/surveys', survey)
     }
+    
+    deleteSurvey(survey: Survey){
+        return this.http.delete(`/api/surveys/${survey.Survey}`)
+    }
 }

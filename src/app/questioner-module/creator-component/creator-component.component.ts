@@ -66,9 +66,10 @@ export class CreatorComponentComponent implements OnInit {
   onSubmit(){
     
      //this.questions.push(this.openquestions, this.checkboxquestions, this.radiobuttonquestions)
-     alert(JSON.stringify(this.memberForm.value))
+     //alert(JSON.stringify(this.memberForm.value))
      const SurveyC: Survey = {
-      Survey: JSON.stringify(this.memberForm.value)
+      Survey: JSON.stringify(this.memberForm.value),
+      id: this.title
     }
     this.aSub = this.SurveyService.createSurvey(SurveyC)
        .subscribe(

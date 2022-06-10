@@ -1,14 +1,14 @@
 <div class="container">
-    <form [formGroup]="form">
+    <form [formGroup]="form" class="row">
         <!-- <label for="title">Title:</label>
         <input (input)="inputHandler($event)" formControlName="title" id="title" type="text"
             [ngClass]="{'invalid': form.get('title')?.invalid && form.get('title')?.touched}"> -->
         <span class="helper-text" *ngIf="form.get('title')?.invalid && form.get('title')?.touched">
             <span *ngIf="form.get('title')?.errors?.['required']">This field cannot be empty!</span>
         </span>
-        <button type="button" class="btn" (click)="OpenQ()">Добавить открытый вопрос</button>
-        <button type="button" class="btn" (click)="CheckBoxQComplete()">Добавить вопрос с несколькими вариантами выбора</button>
-        <button type="button" class="btn" (click)="RadioButtonQComplete()">Добавить вопрос с одним вариантом выбора</button>
+        <button type="button" class="btn col-s4" (click)="OpenQ()">Открытый вопрос</button>
+        <button type="button" class="btn col-s4" (click)="CheckBoxQComplete()">Вопрос с несколькими вариантами выбора</button>
+        <button type="button" class="btn col-s4" (click)="RadioButtonQComplete()">Вопрос с одним вариантом выбора</button>
     </form>
     <form class="card" (ngSubmit)="onSubmit()" #membershipForm="ngForm">
         <!-- <div class="form-group">
@@ -20,8 +20,10 @@
         <div style="margin: 25px;">
             <div *ngFor="let item of openquestions; let i = index">
                 <strong>Вопрос:</strong>
+                <div style="display: flex; flex-direction: row;">
                 <input name="OpenQTitle[{{i}}]" [(ngModel)]="OpenQTitle[i]"  type="text">
                 <button type="button" (click)="DeleteOpenQ(i)"><i class="material-icons">delete_sweep</i></button>
+                </div>
             </div>
             <div class="form-check" *ngFor="let checkboxes of checkboxquestions; let i = index ">
                 <strong>Вопрос:</strong>
