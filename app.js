@@ -5,7 +5,7 @@ const SurveyCreateRoutes = require('./routes/surveys')
 const AnswerCreateRoutes = require('./routes/answer')
 const app = express()
 
-mongoose.connect('mongodb+srv://Host:HostPassword@cluster0.ufsdc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect('mongodb://127.0.0.1:27017/newwdb')
 .then(() => console.log("MongoDb connected"))
 .catch(err => console.log(err));
 
